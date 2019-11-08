@@ -3,6 +3,12 @@
 int fsm_unit(char end);
 int is_digit(char ch);
 
+/*
+ * fsm_unit函数负责匹配1~3个合法数字+一个结束符，所谓合法是指表示数介于0~255
+ * 对于前三节，结束符是 '.'；
+ * 对于最后一节，结束符是 '\n'。
+ */
+
 int main()
 {
     int a[4];
@@ -42,12 +48,16 @@ int main()
     }
     if (state == 4)
     {
-        //TODO: COMPLETE THE OUTPUT:
-        // You should turn the legal IP to an int as told in the experiment's guide.
-        printf("success\n");
+        int i;
+        unsigned long int converted_ip = 0;
+        for (i = 0; i < 4; ++i)
+        {
+            converted_ip = (converted_ip << 8) + a[i];
+        }
+        printf("YES\n%lu", converted_ip);
     } else
     {
-        printf("illegal IP address.\n");
+        printf("NO\n");
     }
 }
 

@@ -35,8 +35,7 @@ int main()
             m = d;
         else
         {
-            m = n;
-            n = d;
+            m = n, n = d;
         }
     }
     d = m;
