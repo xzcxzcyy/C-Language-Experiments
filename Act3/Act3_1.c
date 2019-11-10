@@ -2,6 +2,7 @@
 
 int main()
 {
+    setbuf(stdout, NULL);
     int i, x, k, flag = 0;
     printf("本程序判断合数，请输入大于1的整数，Ctrl+z结束\n");
     while (scanf("%d", &x) != EOF)

@@ -70,13 +70,8 @@ double tax2(double s)
             rate = 0.20;
             break;
 
-        case 5:
-            rate = 0.25;
-            break;
-
         default:
-            /* -1 for bug tracking */
-            rate = -1.0;
+            rate = 0.25;
             break;
     }
     return s * rate;
