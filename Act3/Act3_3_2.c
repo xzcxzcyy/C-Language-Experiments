@@ -8,8 +8,8 @@ int main()
     int n;
     printf("Please enter the number of day(s): \n");
     scanf("%d", &n);
-    double pre, cur;
-    pre = scanf("%lf", &pre);
+    double pre, cur; //previous, current
+    scanf("%lf", &pre);
     int i;
     double maxdelta = 0.0;
     for (i = 1; i < n; ++i)
