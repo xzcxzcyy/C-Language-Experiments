@@ -10,6 +10,7 @@ int main()
     printf("Please enter the number of day(s): \n");
     scanf("%d", &n);
     double pre, cur; //previous, current
+    printf("Please enter the value(s):\n");
     scanf("%lf", &pre);
     int i;
     double maxdelta = 0.0; //delta of max
