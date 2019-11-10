@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-double mabs(double x);
+double m_abs(double x);
 void search(int stage, double a, double b);
 
 int success = 0;
@@ -13,7 +13,7 @@ int main()
     return 0;
 }
 
-double mabs(double x)
+double m_abs(double x)
 {
     return x >= 0 ? x : -x;
 }
@@ -23,7 +23,7 @@ void search(int stage, double a, double b)
     if (stage == 4)
     {
         ++total;
-        if (mabs(a - b) < 1000)
+        if (m_abs(a - b) < 1000)
         {
             ++success;
         }

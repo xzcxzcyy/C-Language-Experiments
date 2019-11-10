@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-double mabs(double x);
+/* m_abs() returns the absolute value of a double*/
+double m_abs(double x);
 
 int main()
 {
@@ -11,13 +12,13 @@ int main()
     double pre, cur; //previous, current
     scanf("%lf", &pre);
     int i;
-    double maxdelta = 0.0;
+    double maxdelta = 0.0; //delta of max
     for (i = 1; i < n; ++i)
     {
         scanf("%lf", &cur);
-        if (mabs(cur - pre) > maxdelta)
+        if (m_abs(cur - pre) > maxdelta)
         {
-            maxdelta = mabs(cur - pre);
+            maxdelta = m_abs(cur - pre);
         }
         pre = cur;
     }
@@ -25,7 +26,7 @@ int main()
     return 0;
 }
 
-double mabs(double x)
+double m_abs(double x)
 {
     return x >= 0 ? x : -x;
 }
