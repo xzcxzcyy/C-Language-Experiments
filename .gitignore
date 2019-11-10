@@ -61,7 +61,10 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
 HUST-CS-Report-Template/
 *.zip
 */.idea/
 */cmake-build-debug/
+*.docx
+*.doc
