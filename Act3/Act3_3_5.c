@@ -9,8 +9,10 @@ int main()
     {
         for (b = 0; b <= 9; ++b)
         {
+            /* To guarantee that the two numbers do not equal. */
             if (a != b)
             {
+                /* To combine the digits and make up a number. */
                 current = a * 1000 + a * 100 + b * 10 + b;
                 if ((int) sqrt(current) * (int) sqrt(current) == current)
                 {
