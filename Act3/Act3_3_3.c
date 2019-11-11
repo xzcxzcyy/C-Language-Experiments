@@ -17,6 +17,7 @@ int main()
     setbuf(stdout, NULL);
     enum State current = init;
     char ch;
+    printf("Please enter some characters.\nPress Ctrl + D to quit.\n");
     while ((ch = getchar()) != EOF)
     {
         switch (current)

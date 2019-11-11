@@ -68,3 +68,4 @@ HUST-CS-Report-Template/
 */cmake-build-debug/
 *.docx
 *.doc
+*.svg
