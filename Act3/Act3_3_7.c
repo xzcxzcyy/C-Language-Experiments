@@ -2,7 +2,7 @@
 
 #define MAXM 1000000
 
-//n as the greatest prime
+//m as the greatest prime
 void createPrimeTable(int m);
 
 int tb[MAXM + 1]; //tb as the Prime Table
@@ -22,7 +22,7 @@ int main()
     {
         if (tb[i] && tb[i + 2])
         {
-            printf("(%d, %d)\n", i, i + 2);
+            printf("(%d, %d)  ", i, i + 2);
         }
     }
 
