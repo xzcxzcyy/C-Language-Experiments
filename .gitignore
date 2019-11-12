@@ -69,3 +69,4 @@ HUST-CS-Report-Template/
 *.docx
 *.doc
 *.svg
+*/.vscode
