@@ -10,6 +10,7 @@ void print();
 
 int main()
 {
+    printf("Please input integer x, which is between 2 and 79.\n");
     scanf("%d", &x);
     search(0);
     return 0;
