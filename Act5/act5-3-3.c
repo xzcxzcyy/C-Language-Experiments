@@ -1,5 +1,6 @@
 /*
  * 程序设计：成绩系统
+ * 添加功能：二分查找
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -14,7 +15,9 @@ enum Option
 {
     oInput = 1,
     oOutput = 2,
-    oQuit = 3
+    oSearch = 3,
+    oQuit = 4
+
 };
 
 void input(int n);
@@ -24,6 +27,7 @@ void sswap(double *a, double *b); //score swap
 void nswap(char **a, char **b);   //name swap
 enum Option menu();
 int mbigger(int i, int j);
+void msearch(int n);
 
 int main()
 {
@@ -43,6 +47,10 @@ int main()
 
             case oOutput:
                 output(n);
+                break;
+
+            case oSearch:
+                msearch(n);
                 break;
         }
     }
@@ -170,7 +178,7 @@ enum Option menu()
     printf("\n\n\n");
     printf("  Menu  \n");
     printf("Please select an operation:\n");
-    printf("1.Input data\n2.Display data\n(Use q to quit)");
+    printf("1.Input data\n2.Display data\n3.Search a score value\n(Use q to quit)");
     printf("\n\n\n");
     for (i = 0; i < n; ++i)
     {
@@ -178,7 +186,7 @@ enum Option menu()
     }
     putchar('\n');
     char command;
-    while (scanf(" %c", &command) && command != '1' && command != '2' && command != 'q')
+    while (scanf(" %c", &command) && command != '1' && command != '2' && command != 'q' && command != '3')
     {
         printf("Illegal command!\nPlease try again.\n");
     }
@@ -187,4 +195,40 @@ enum Option menu()
         return oQuit;
     }
     return command - '0';
+}
+
+void msearch(int n)
+{
+    system("cls");
+    int x = 0, y = n;
+    double v;
+    printf("Please enter a score as a key value:\n");
+    scanf("%lf", &v);
+
+    int m;
+    while (x < y)
+    {
+        m = x + (y - x) / 2;
+        if (scores[m] <= v)
+        {
+            y = m;
+        } else
+        {
+            x = m + 1;
+        }
+    }
+
+    int cnt = 0;
+    int i;
+    for (i = x; scores[i] == v && i < n; ++i)
+    {
+        printf("%s", names[i]);
+        printf("%8.2f\n", scores[i]);
+        ++cnt;
+    }
+    if (cnt == 0)
+    {
+        printf("not found!\n");
+    }
+    system("pause");
 }
