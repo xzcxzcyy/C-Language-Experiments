@@ -1,32 +1,57 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define MAX 100
 
 double scores[MAX];
 char *names[MAX];
-int n;
 
 enum Option
 {
-    oInput, oOutput, oFind
+    oInput = 1,
+    oOutput = 2,
+    oQuit = 3
 };
 
 void input(int n);
 void output(int n);
-void mqsort(int begin, int end); //my quick sort
+void mqsort(int begin, int end);  //my quick sort
 void sswap(double *a, double *b); //score swap
-void nswap(char **a, char **b); //name swap
+void nswap(char **a, char **b);   //name swap
 enum Option menu();
+int mbigger(int i, int j);
 
 int main()
 {
+    setbuf(stdout, NULL);
+    int cmd, n = 0;
+    while ((cmd = menu()) != oQuit)
+    {
+        switch (cmd)
+        {
+            case oInput:
+                system("cls");
+                printf("Please input the number of data:\n");
+                scanf("%d", &n);
+                input(n);
+                mqsort(0, n);
+                break;
 
+            case oOutput:
+                output(n);
+                break;
+        }
+    }
     return 0;
 }
 
 void input(int n)
 {
+    if (n)
+    {
+        printf("Please input data with the pattern of [name] + [score] on each line\n");
+    }
     int i;
     for (i = 0; i < n; ++i)
     {
@@ -38,12 +63,19 @@ void input(int n)
 
 void output(int n)
 {
+    system("cls");
+    if (n == 0)
+    {
+        printf("No data!\n");
+    }
+
     int i;
     for (i = 0; i < n; ++i)
     {
         printf("%s", names[i]);
         printf("%8.2f\n", scores[i]);
     }
+    system("pause");
 }
 
 void nswap(char **a, char **b)
@@ -62,6 +94,37 @@ void sswap(double *a, double *b)
     *b = t;
 }
 
+int mbigger(int i, int j)
+{
+    if (scores[i] > scores[j])
+    {
+        return 1;
+    }
+    if (scores[i] == scores[j])
+    {
+        int m, n;
+        for (m = 0, n = 0; m < strlen(names[i]) && n < strlen(names[j]); ++m, ++n)
+        {
+            if (names[i][m] < names[j][n])
+            {
+                return 1;
+            }
+            if (names[i][m] > names[j][n])
+            {
+                return 0;
+            }
+        }
+        if (strlen(names[i]) < strlen(names[j]))
+        {
+            return 1;
+        } else
+        {
+            return 0;
+        }
+    }
+    return 0;
+}
+
 void mqsort(int begin, int end)
 {
     if (end - begin <= 1)
@@ -69,14 +132,14 @@ void mqsort(int begin, int end)
         return;
     }
     int i = begin, j = end - 1;
-    double pivot = scores[i + (j - i) / 2];
+    int pivot = i + (end - begin) / 2;
     while (i <= j)
     {
-        while (scores[i] > pivot)
+        while (mbigger(i, pivot))
         {
             ++i;
         }
-        while (scores[j] < pivot)
+        while (mbigger(pivot, j))
         {
             --j;
         }
@@ -94,5 +157,31 @@ void mqsort(int begin, int end)
 
 enum Option menu()
 {
-
+    system("cls");
+    int i;
+    const int n = 20;
+    for (i = 0; i < n; ++i)
+    {
+        putchar('=');
+    }
+    printf("\n\n\n");
+    printf("  Menu  \n");
+    printf("Please select an operation:\n");
+    printf("1.Input data\n2.Display data\n(Use q to quit)");
+    printf("\n\n\n");
+    for (i = 0; i < n; ++i)
+    {
+        putchar('=');
+    }
+    putchar('\n');
+    char command;
+    while (scanf(" %c", &command) && command != '1' && command != '2' && command != 'q')
+    {
+        printf("Illegal command!\nPlease try again.\n");
+    }
+    if (command == 'q')
+    {
+        return oQuit;
+    }
+    return command - '0';
 }
