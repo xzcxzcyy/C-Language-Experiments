@@ -25,12 +25,14 @@ int main(void)
                 j = 0;
             }
         }
-        b[M - i] = j ? a[j - 1] : a[i - 1]; // 1st blank: 数数的时候多数了一次！
+        b[M - i] = j ? a[j - 1] : a[i - 1];
+        // 1st blank: 数数的时候多数了一次！
         if (j)
         {
             for (k = --j; k < i; k++)
             {
-                a[k] = k != i - 1 ? a[k + 1] : 0; //2nd blank: 特别注意防止数组越界
+                a[k] = k != i - 1 ? a[k + 1] : 0;
+                //2nd blank: 特别注意防止数组越界
             }
         }
     }

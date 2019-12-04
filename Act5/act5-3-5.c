@@ -1,5 +1,5 @@
 /*
- * 开心消消乐
+ * 消除类游戏
  */
 
 #include <stdio.h>
@@ -8,11 +8,8 @@
 
 int main()
 {
-
     static int data[MAXN][MAXN];
     static int deleted[MAXN][MAXN] = {{0}};
-
-    setbuf(stdout, NULL);
     int n, m;
     printf("Please input the number of lines and columns:\n");
     scanf("%d %d", &n, &m);
@@ -56,7 +53,8 @@ int main()
                     if (temp == data[i][j])
                     {
                         state = 3;
-                        deleted[i][j - 2] = deleted[i][j - 1] = deleted[i][j] = 1;
+                        deleted[i][j - 2] =
+                        deleted[i][j - 1] = deleted[i][j] = 1;
                     } else
                     {
                         temp = data[i][j];
@@ -100,7 +98,8 @@ int main()
                     if (temp == data[i][j])
                     {
                         state = 3;
-                        deleted[i - 2][j] = deleted[i - 1][j] = deleted[i][j] = 1;
+                        deleted[i - 2][j] =
+                        deleted[i - 1][j] = deleted[i][j] = 1;
                     } else
                     {
                         temp = data[i][j];

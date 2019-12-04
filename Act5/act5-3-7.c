@@ -15,7 +15,6 @@ void search(int x, int y, int line, int column);
 
 int main()
 {
-    //setbuf(stdout, NULL);
     printf("Please enter the number of lines and columns:\n");
     fflush(stdout);
     int line, column;
@@ -47,6 +46,7 @@ void input(int line, int column)
     }
 }
 
+// 使用 ANSI 转义序列输出色块以绘制地图。
 void print(int line, int column)
 {
     putchar('\n');
@@ -80,9 +80,12 @@ int available(int x, int y, int line, int column)
 void search(int x, int y, int line, int column)
 {
     map[x][y] = 2;
+    // 如果到终点
     if (x == line - 1 && y == column - 1)
     {
         print(line, column);
+        map[x][y] = 0;
+        return;
     }
     int i;
     for (i = -1; i <= 1; i += 2)

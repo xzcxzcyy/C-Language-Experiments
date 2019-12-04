@@ -19,15 +19,14 @@ enum Option
 
 void input(int n);
 void output(int n);
-void mqsort(int begin, int end);  //my quick sort
+void mqsort(int begin, int end);  //快排：左开右闭区间
 void sswap(double *a, double *b); //score swap
 void nswap(char **a, char **b);   //name swap
-enum Option menu();
-int mbigger(int i, int j);
+enum Option menu(); //用于获取用户选项
+int mbigger(int i, int j); //比较函数，若成绩相同，则比较名字的字典序
 
 int main()
 {
-    setbuf(stdout, NULL);
     int cmd, n = 0;
     while ((cmd = menu()) != oQuit)
     {
@@ -162,13 +161,13 @@ enum Option menu()
 {
     system("cls");
     int i;
-    const int n = 20;
+    const int n = 40;
     for (i = 0; i < n; ++i)
     {
         putchar('=');
     }
     printf("\n\n\n");
-    printf("  Menu  \n");
+    printf("[Menu]\n");
     printf("Please select an operation:\n");
     printf("1.Input data\n2.Display data\n(Use q to quit)");
     printf("\n\n\n");

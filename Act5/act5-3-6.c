@@ -12,7 +12,6 @@ int putDot = 0;
 int main()
 {
     static int res[20] = {0};
-    setbuf(stdout, NULL);
     int n;
     printf("Please input a number:\n");
     scanf("%d", &n);
@@ -46,6 +45,9 @@ void search(int n, int *res, int p)
     }
 
     int mMin = (p == 0 || n <= res[p - 1]) ? n : res[p - 1];
+    // 如果前面没有已经生成的答案，或 n<=res[p-1] ，则 i 的上限为 n ；
+    // 否则上限为 res[p-1]
+    // 这样就保证了得到的答案序列递减
     int i; // i 是当前要分出来的数
     for (i = mMin; i >= 1; --i)
     {

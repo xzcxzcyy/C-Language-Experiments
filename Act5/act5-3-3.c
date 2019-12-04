@@ -170,7 +170,7 @@ enum Option menu()
 {
     system("cls");
     int i;
-    const int n = 20;
+    const int n = 40;
     for (i = 0; i < n; ++i)
     {
         putchar('=');
