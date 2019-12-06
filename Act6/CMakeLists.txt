@@ -4,3 +4,4 @@ project(Act6 C)
 set(CMAKE_C_STANDARD 99)
 
 add_executable(Act6-1 act6-1.c)
+add_executable(act6-2-1-1 act6-2-1-1.c)

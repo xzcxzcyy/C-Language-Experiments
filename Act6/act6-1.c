@@ -1,3 +1,7 @@
+/*
+ * 字符串复制
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 
