@@ -1,27 +1,27 @@
 /*
- * 字符串排序函数
+ * 字符串排序函数重写：
+ * 利用指针访问
  */
 
-// 1st blank: malloc 函数位于头文件 stdlib.h
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #define N 4
 
-void strsort(char *s[], int size)
+void strsort(char **s, int size)
 {
-    char *temp; // 2nd blank
+    char *temp;
     int i, j;
     for (i = 0; i < size - 1; i++)
     {
         for (j = 0; j < size - i - 1; j++)
         {
-            if (strcmp(s[j], s[j + 1]) > 0) // 3rd blank
+            if (strcmp(*(s + j), *(s + j + 1)) > 0)
             {
-                temp = s[j];
-                s[j] = s[j + 1]; // 4th blank
-                s[j + 1] = temp;
+                temp = *(s + j);
+                *(s + j) = *(s + j + 1);
+                *(s + j + 1) = temp;
             }
         }
     }
@@ -35,7 +35,7 @@ int main()
     {
         gets(t);
         s[i] = (char *) malloc(strlen(t) + 1);
-        strcpy(s[i], t); // 5th blank
+        strcpy(s[i], t);
     }
     strsort(s, N);
     for (i = 0; i < N; i++)
