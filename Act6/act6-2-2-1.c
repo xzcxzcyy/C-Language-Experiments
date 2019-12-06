@@ -1,3 +1,7 @@
+/*
+ * 字符串复制，连接与分割
+ */
+
 #include <stdio.h>
 #include <string.h>
 
