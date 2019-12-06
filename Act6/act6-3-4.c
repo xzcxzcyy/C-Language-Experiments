@@ -6,8 +6,10 @@
 #include <string.h>
 #include <stdlib.h>
 
-int less(const void *x, const void *y);
-int more(const void *x, const void *y);
+int less(const int x, const int y);
+int more(const int x, const int y);
+void mqsort(int *begin, int *end, int (*cmp)(const int x, const int y));
+void mswap(int *a, int *b);
 
 int main(int argc, char **argv)
 {
@@ -17,7 +19,7 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    int (*funcp)(const void *, const void *);
+    int (*funcp)(const int, const int);
     int i;
     if (argc == 3)
     {
@@ -49,7 +51,7 @@ int main(int argc, char **argv)
     {
         scanf("%d", &arr[j]);
     }
-    qsort(arr, n, sizeof(int), funcp);
+    mqsort(arr, arr + n, funcp);
 
     for (j = 0; j < n; ++j)
     {
@@ -57,16 +59,49 @@ int main(int argc, char **argv)
     }
 }
 
-int less(const void *x, const void *y)
+int less(const int x, const int y)
 {
-    int a = *(int *) x;
-    int b = *(int *) y;
-    return a - b;
+    return x - y;
 }
 
-int more(const void *x, const void *y)
+int more(const int x, const int y)
 {
-    int a = *(int *) x;
-    int b = *(int *) y;
-    return b - a;
+    return y - x;
+}
+
+void mqsort(int *begin, int *end, int (*cmp)(const int x, const int y))
+{
+    if (end - begin <= 1)
+    {
+        return;
+    }
+    int *i = begin, *j = end - 1;
+    int pivot = *(i + (end - begin) / 2);
+    while (i <= j)
+    {
+        while (cmp(*i, pivot) < 0)
+        {
+            ++i;
+        }
+        while (cmp(pivot, *j) < 0)
+        {
+            --j;
+        }
+        if (i <= j)
+        {
+            mswap(i, j);
+            ++i;
+            --j;
+        }
+    }
+    mqsort(begin, j + 1, cmp);
+    mqsort(i, end, cmp);
+}
+
+void mswap(int *a, int *b)
+{
+    int t;
+    t = *a;
+    *a = *b;
+    *b = t;
 }
