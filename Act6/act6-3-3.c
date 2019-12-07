@@ -17,7 +17,7 @@ int main()
     int n, m;
     scanf("%d %d", &n, &m);
     int arr[n][m];
-    int tar[n][m];
+    int tar[m][n];
     int i, j;
     for (i = 0; i < n; ++i)
     {
@@ -45,7 +45,7 @@ void spin(int *target, const int *source, int line, int column)
     {
         for (j = 0; j < column; ++j)
         {
-            *(target + column * (line - j) + i) = *(source + column * i + j);
+            *(target + line * (column - 1 - j) + i) = *(source + column * i + j);
         }
     }
 }
