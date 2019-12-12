@@ -64,7 +64,7 @@ dkms.conf
 
 HUST-CS-Report-Template/
 *.zip
-*/.idea/
+.idea/
 */cmake-build-debug/
 *.docx
 *.doc
