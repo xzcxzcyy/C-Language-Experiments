@@ -53,7 +53,7 @@ int main()
                 break;
 
             case 3:
-                modify(list);
+                while (!modify(list));
                 makeAverage(list);
                 break;
 
@@ -105,6 +105,7 @@ void output(const struct List *head)
         putchar('\n');
         head = head->next;
     }
+    system("pause");
 }
 
 int modify(struct List *head)
@@ -166,6 +167,7 @@ int modify(struct List *head)
     else
     {
         puts("ID not found!");
+        system("pause");
         return 0;
     }
 }
@@ -190,6 +192,7 @@ void outputAverage(const struct List *head)
         putchar('\n');
         head = head->next;
     }
+    system("pause");
 }
 
 int menu()
