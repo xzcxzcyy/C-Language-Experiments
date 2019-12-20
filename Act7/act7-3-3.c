@@ -34,8 +34,8 @@ int modify(struct List *head);
 void makeAverage(struct List *head);
 void outputAverage(const struct List *head);
 int menu();
-void mSort(struct List **p);
-void mSwap(struct List *pre1, struct List *p1, struct List *pre2, struct List *p2);
+void mSort(struct List *p);
+void mSwap(struct List *p1, struct List *p2);
 int smaller(const struct List *p1, const struct List *p2);
 
 int main()
@@ -219,7 +219,7 @@ int menu()
     return cmd;
 }
 
-void mSort(struct List **p)
+void mSort(struct List *p)
 {
     struct List *x = p, *y = p;
     for (; x != NULL; x = x->next)
@@ -228,13 +228,13 @@ void mSort(struct List **p)
         {
             if (smaller(y, x))
             {
-                mSwap(NULL, x, NULL, y);
+                mSwap(x, y);
             }
         }
     }
 }
 
-void mSwap(struct List *pre1, struct List *p1, struct List *pre2, struct List *p2)
+void mSwap(struct List *p1, struct List *p2)
 {
     struct Student t = p1->data;
     p1->data = p2->data;
