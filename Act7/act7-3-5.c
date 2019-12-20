@@ -1,6 +1,7 @@
 /*
  * 成绩单
  * 选择排序
+ * 交换指针域
  */
 
 #include <stdio.h>
@@ -38,6 +39,28 @@ void mSort(struct List **p);
 void mSwap(struct List *pre1, struct List *p1, struct List *pre2, struct List *p2);
 int smaller(const struct List *p1, const struct List *p2);
 
+void testSwap()
+{
+    struct List *L[4];
+    for (int i = 0; i < 4; ++i)
+    {
+        L[i] = malloc(LSIZE);
+        L[i]->data.id = i;
+    }
+    for (int i = 0; i < 3; ++i)
+    {
+        L[i]->next = L[i + 1];
+    }
+    L[3]->next = NULL;
+    struct List *p = L[0];
+    mSwap(NULL, L[0], L[1], L[2]);
+    while (p != NULL)
+    {
+        printf("%lld ", p->data.id);
+        p = p->next;
+    }
+}
+
 int main()
 {
     setbuf(stdout, NULL);
@@ -50,7 +73,7 @@ int main()
             case 1:
                 list = input();
                 makeAverage(list);
-                mSort(list);
+                mSort(&list);
                 break;
 
             case 2:
@@ -60,7 +83,7 @@ int main()
             case 3:
                 while (!modify(list));
                 makeAverage(list);
-                mSort(list);
+                mSort(&list);
                 break;
 
             case 4:
@@ -221,14 +244,22 @@ int menu()
 
 void mSort(struct List **p)
 {
-    struct List *x = p, *y = p;
-    for (; x != NULL; x = x->next)
+    struct List *x = *p, *y = *p, *px = NULL, *py = NULL;
+    for (; x != NULL; px = x, x = x->next)
     {
-        for (y = x->next; y != NULL; y = y->next)
+        for (py = x, y = x->next; y != NULL; py = y, y = y->next)
         {
             if (smaller(y, x))
             {
-                mSwap(NULL, x, NULL, y);
+                mSwap(px, x, py, y);
+                struct List *t;
+                t = x;
+                x = y;
+                y = t;
+                if (px == NULL)
+                {
+                    *p = x;
+                }
             }
         }
     }
@@ -236,9 +267,45 @@ void mSort(struct List **p)
 
 void mSwap(struct List *pre1, struct List *p1, struct List *pre2, struct List *p2)
 {
-    struct Student t = p1->data;
-    p1->data = p2->data;
-    p2->data = t;
+    struct List *post1 = p1->next, *post2 = p2->next;
+
+    if (p1 == p2)
+    {
+        return;
+    }
+
+    if (post1 == p2)
+    {
+        if (pre1 != NULL)
+        {
+            pre1->next = p2;
+        }
+        p2->next = p1;
+        p1->next = post2;
+        return;
+    }
+
+    if (post2 == p1)
+    {
+        if (pre2 != NULL)
+        {
+            pre2->next = p1;
+        }
+        p1->next = p2;
+        p2->next = post1;
+        return;
+    }
+
+    p2->next = post1;
+    p1->next = post2;
+    if (pre1 != NULL)
+    {
+        pre1->next = p2;
+    }
+    if (pre2 != NULL)
+    {
+        pre2->next = p1;
+    }
 }
 
 int smaller(const struct List *p1, const struct List *p2)
