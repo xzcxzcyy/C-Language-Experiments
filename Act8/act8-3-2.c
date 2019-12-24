@@ -12,7 +12,7 @@ int main()
         scanf("%f", &arr[i]);
     }
 
-    FILE *fout = fopen("float.dat", "w");
+    FILE *fout = fopen("float.dat", "wb");
     if (fout == NULL)
     {
         fputs("Can't create file \"float.dat\"\n", stderr);
